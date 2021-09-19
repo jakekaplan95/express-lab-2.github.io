@@ -5,12 +5,17 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// Bottles subtracting variable
-var bottles = (req.params.number_of_bottles - 1)
+const bottles = require("./models/bottles")
 
+app.get('/', (req, res) => {
+    res.render("show.ejs", {subtractBottle: 98, currentBottle: 99})
+});
 
-app.get("/:number_of_bottles", (req, res) => {
-    res.render("show.ejs");
+app.get('/:number_of_bottles', (req, res) => {
+    var currentBottle = req.params.number_of_bottles
+    var subtractBottle = req.params.number_of_bottles - 1
+    res.render("show.ejs",  {subtractBottle: subtractBottle,
+                             currentBottle: currentBottle})
 })
 
 
